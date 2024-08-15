@@ -22,6 +22,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Image from "next/image";
 
 const products = [
   {
@@ -98,9 +99,9 @@ const products = [
 
 // Header Component
 const Header = () => (
-  <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-    <div className="container flex h-14 items-center">
-      <div className="mr-4 flex flex-1 items-center justify-between">
+  <header className="mx-auto px-4 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div className=" flex h-14 items-center">
+      <div className="flex flex-1 items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <span className="font-bold">E-Shop</span>
         </Link>
@@ -136,6 +137,13 @@ const Header = () => (
                 prefetch={false}
               >
                 Best Sellers
+              </Link>
+              <Link
+                href="/cart"
+                className="text-sm font-medium"
+                prefetch={false}
+              >
+                cart
               </Link>
             </nav>
           </SheetContent>
@@ -197,20 +205,22 @@ const SearchBar = () => {
 const Banner = () => (
   <div className="mb-6">
     <Carousel>
-      <CarouselContent className="relative h-[200px] md:h-[300px] bg-gray-100">
+      <CarouselContent className="relative h-[200px] md:h-[300px] bg-gray-100 rounded-lg overflow-hidden">
         {[...Array(2)].map((category, index) => (
           <CarouselItem
             key={index}
-            className="relative md:basis-1/4 lg:basis-1/6 min-h-full"
+            className="relative md:basis-1/4 lg:basis-1/6 min-h-full "
           >
-            <img
-              src="/placeholder.svg"
+            <Image
+              width={1000}
+              height={1000}
+              src="/p3.jpg"
               alt="Banner"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white">
+            {/* <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white">
               <h2 className="text-2xl md:text-4xl font-bold">Summer Sale</h2>
-            </div>
+            </div> */}
           </CarouselItem>
         ))}
       </CarouselContent>
@@ -284,23 +294,26 @@ const ProductCard = ({ product }: any) => (
 
       <div className="relative w-full h-40 ">
         <img
-          src="/placeholder.svg"
+          src="/p2.jpg"
           alt="Banner"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white">
-          <h2 className="text-2xl md:text-4xl font-bold">Summer Sale</h2>
-        </div>
       </div>
-      <div className="p-4 bg-secondary">
+      <div className="p-4 bg-muted">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="font-semibold truncate">{product.name}</h3>
+          <h3 className="font-semibold truncate text-primary-foreground">
+            {product.name}
+          </h3>
         </div>
         <div className="flex justify-between items-center">
-          <span className="font-bold">${product.price.toFixed(2)}</span>
+          <span className="font-bold text-primary-foreground">
+            ${product.price.toFixed(2)}
+          </span>
           <div className="flex items-center">
             <Star className="h-4 w-4 fill-primary text-primary" />
-            <span className="text-sm ml-1">{product.rating}</span>
+            <span className="text-sm ml-1 text-secondary-foreground">
+              {product.rating}
+            </span>
           </div>
         </div>
       </div>
@@ -314,7 +327,8 @@ const ProductSection = ({ title }: any) => (
     <div className="flex justify-between items-center mb-4">
       <h2 className="text-xl font-semibold">{"title"}</h2>
       <Link
-        href={`/${"title".toLowerCase().replace(" ", "-")}`}
+        // href={`/${"title".toLowerCase().replace(" ", "-")}`}
+        href={`/product`}
         className="text-sm text-primary flex items-center"
         prefetch={false}
       >
@@ -331,8 +345,8 @@ const ProductSection = ({ title }: any) => (
 
 // Footer Component
 const Footer = () => (
-  <footer className="fixed bottom-0 left-0 right-0 bg-background border-t py-2">
-    <div className="container flex justify-around items-center">
+  <footer className="fixed mx-auto px-4 bottom-0 left-0 right-0 bg-background border-t py-2">
+    <div className="flex justify-around items-center">
       <Button
         variant="ghost"
         size="icon"
@@ -347,7 +361,7 @@ const Footer = () => (
         className="flex flex-col items-center"
       >
         <ShoppingBag className="h-5 w-5" />
-        <span className="text-xs mt-1">Shop</span>
+        <span className="text-xs mt-1">Cart</span>
       </Button>
       <Button
         variant="ghost"
